@@ -1,0 +1,10 @@
+---
+- name: Ensure __role_name is defined
+  ansible.builtin.assert:
+    that:
+      - __role_name is defined
+      - __role_name is string
+      - __role_name | length > 0
+      # - "__role_name != ['replace', 'me'] | join('')" # Make sure I don't forget to replace the role name
+
+...

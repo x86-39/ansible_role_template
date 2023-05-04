@@ -1,0 +1,6 @@
+---
+- name: Debug from replaceme
+  ansible.builtin.debug:
+    msg: "Hello from {{ __role_name }}"
+
+...

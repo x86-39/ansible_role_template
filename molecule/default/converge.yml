@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Wait for containers to be ready"
+      ansible.builtin.wait_for_connection:
+        delay: 5
+        timeout: 300
+    - name: "Include diademiemi.replaceme"
+      ansible.builtin.include_role:
+        name: "diademiemi.replaceme"

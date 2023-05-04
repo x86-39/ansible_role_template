@@ -1,0 +1,57 @@
+---
+- name: "Main | Ensure ansible_facts used by role"
+  ansible.builtin.setup:
+    gather_subset: min
+
+- name: "Main | Set platform/version specific variables"
+  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', find_vars) }}"
+  vars:
+    find_vars:
+      files:
+        - "{{ (ansible_facts['distribution'] | lower) | replace(' ', '_') }}_\
+          {{ ansible_facts['distribution_version'] }}.yml"
+        - "{{ (ansible_facts['distribution'] | lower) | replace(' ', '_') }}_\
+          {{ ansible_facts['distribution_major_version'] }}.yml"
+        - "{{ (ansible_facts['distribution'] | lower) | replace(' ', '_') }}.yml"
+        - "{{ ansible_facts['os_family'] | lower }}.yml"
+        - "default.yml"
+      skip: true
+      paths:
+        - "vars"
+
+- name: "Main | Assert platform/version specific variables"
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', find_asserts) }}"
+  vars:
+    find_asserts:
+      files:
+        - "{{ (ansible_facts['distribution'] | lower) | replace(' ', '_') }}_\
+          {{ ansible_facts['distribution_version'] }}.yml"
+        - "{{ (ansible_facts['distribution'] | lower) | replace(' ', '_') }}_\
+          {{ ansible_facts['distribution_major_version'] }}.yml"
+        - "{{ (ansible_facts['distribution'] | lower) | replace(' ', '_') }}.yml" 
+        - "{{ ansible_facts['os_family'] | lower }}.yml"
+        - "default.yml"
+      skip: true
+      paths:
+        - "assert"
+
+- name: "Main | platform/version specific playbooks"
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', find_playbooks) }}"
+  vars:
+    find_playbooks:
+      files:
+        - "{{ (ansible_facts['distribution'] | lower) | replace(' ', '_') }}_\
+          {{ ansible_facts['distribution_version'] }}.yml"
+        - "{{ (ansible_facts['distribution'] | lower) | replace(' ', '_') }}_\
+          {{ ansible_facts['distribution_major_version'] }}.yml"
+        - "{{ (ansible_facts['distribution'] | lower) | replace(' ', '_') }}.yml"
+        - "{{ ansible_facts['os_family'] | lower }}.yml"
+        - "default.yml"
+      skip: true
+      paths:
+        - "tasks/{{ __role_action_task }}"
+  loop: "{{ [__role_action | default('setup')] | flatten }}"
+  loop_control:
+    loop_var: __role_action_task
+
+...
