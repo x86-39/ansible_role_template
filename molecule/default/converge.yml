@@ -9,4 +9,4 @@
         timeout: 300
     - name: "Include diademiemi.template"
       ansible.builtin.include_role:
-        name: "diademiemi.template"
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"

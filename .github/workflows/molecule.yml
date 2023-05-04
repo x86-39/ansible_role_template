@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          path: $(echo ${{ github.repository }} | cut -d/ -f2 | sed -r "s/ansible_(role|collection)_//g" | sed "s,\.,/,g")
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -29,7 +27,4 @@ jobs:
         run: ansible-galaxy collection install community.docker
 
       - name: Run molecule
-        run: >-
-          pwd && ls &&
-          cd $(echo ${{ github.repository }} | cut -d/ -f2 | sed -r "s/ansible_(role|collection)_//g" | sed "s,\.,/,g") &&
-          molecule test
+        run: "molecule test"
