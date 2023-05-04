@@ -7,6 +7,6 @@
       ansible.builtin.wait_for_connection:
         delay: 5
         timeout: 300
-    - name: "Include diademiemi.replaceme"
+    - name: "Include diademiemi.template"
       ansible.builtin.include_role:
-        name: "diademiemi.replaceme"
+        name: "diademiemi.template"
