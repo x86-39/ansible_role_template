@@ -14,8 +14,6 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
-    capabilities:
-      - SYS_ADMIN
     command: "/usr/sbin/init"
   - name: ubuntu2204
     image: docker.io/geerlingguy/docker-ubuntu2204-ansible
@@ -27,8 +25,6 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
-    capabilities:
-      - SYS_ADMIN
     command: "/usr/sbin/init"
   - name: debian10
     image: docker.io/geerlingguy/docker-debian10-ansible
@@ -40,8 +36,6 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
-    capabilities:
-      - SYS_ADMIN
     command: "/sbin/init"
   - name: debian11
     image: docker.io/geerlingguy/docker-debian11-ansible
@@ -53,8 +47,6 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
-    capabilities:
-      - SYS_ADMIN
     command: "/sbin/init"
   - name: el8
     image: registry.access.redhat.com/ubi8/ubi-init
@@ -66,8 +58,6 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
-    capabilities:
-      - SYS_ADMIN
     command: "/usr/sbin/init"
   - name: el9
     image: registry.access.redhat.com/ubi9/ubi-init
@@ -79,8 +69,6 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
-    capabilities:
-      - SYS_ADMIN
     command: "/usr/sbin/init"
 provisioner:
   name: ansible
