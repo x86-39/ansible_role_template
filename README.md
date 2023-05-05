@@ -1,7 +1,7 @@
 Ansible Role Template
 =========
 
-This is a template for Ansible roles in my style.  
+This is an Ansible role to 
 
 Some more information.  
 
@@ -9,12 +9,13 @@ Some more information.
 Requirements
 ------------
 These platforms are supported:
-- Ubuntu 20.04
-- Ubuntu 22.04
-- Debian 10
-- Debian 11
-- CentOS Stream/RHEL 8
-- CentOS Stream/RHEL 9
+- Ubuntu 20.04  
+- Ubuntu 22.04  
+- Debian 10  
+- Debian 11  
+- EL 8 (Tested on Rocky Linux 8)  
+- EL 9 (Tested on Rocky Linux 9)  
+- Fedora 38  
 
 <!-- 
 - List hardware requirements here  
@@ -85,9 +86,12 @@ export NEW_ROLE_NAME="NEW_NAME"
 export GITHUB_USER="diademiemi"
 export GALAXY_API_KEY="YOUR_API_KEY"
 
-find . -type f -exec sed -i "s/template/${NEW_ROLE_NAME}/g" {} +
+find . -type f -exec sed -i "s/diademiemi/${GITHUB_USER}/g" {} + # Do not run this more than once
+find . -type f -exec sed -i "s/template/${NEW_ROLE_NAME}/g" {} + # Do not run this more than once
 
-gh secret set GALAXY_API_KEY -u ${GITHUB_USER} -r ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
+# Assumes repo is named ansible_role_${NEW_ROLE_NAME}
+gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
 
+# Remove this section from README.md
 sed -i "/Role Structure/Q" README.md
 ```

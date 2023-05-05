@@ -1,6 +1,7 @@
 ---
-- name: Debug from template
-  ansible.builtin.debug:
-    msg: "Hello from {{ __role_name }}"
+- name: Failover if no platform specific tasks are found
+  ansible.builtin.fail:
+    msg: "Your platform is not supported"
+  when: true
 
 ...
