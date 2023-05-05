@@ -5,6 +5,7 @@
       - __role_name is defined
       - __role_name is string
       - __role_name | length > 0
-      # - "__role_name != ['replace', 'me'] | join('')" # Make sure I don't forget to replace the role name
-
+      # Make sure I don't forget to replace the role name
+      # This assert failing also ensures this role is not uploaded to Ansible Galaxy
+      - "__role_name != ['temp', 'late'] | join('')" 
 ...

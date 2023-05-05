@@ -1,6 +1,7 @@
-name: Molecule
+---
+name: Molecule Test
 
-on:
+"on":
   push:
     branches:
       - main
@@ -28,3 +29,5 @@ jobs:
 
       - name: Run molecule
         run: "molecule test"
+
+...
