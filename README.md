@@ -1,10 +1,9 @@
 Ansible Role Template
 =========
 
-This is an Ansible role to 
+This is an Ansible role to install and configure template.
 
-Some more information.  
-
+Include more information about template in this section.
 
 Requirements
 ------------
@@ -34,7 +33,7 @@ Variable | Default | Description
 
 Dependencies
 ------------
-
+<!-- List dependencies on other roles or criteria -->
 None
 
 Example Playbook
