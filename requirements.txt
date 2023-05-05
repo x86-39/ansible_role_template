@@ -2,4 +2,4 @@ yamllint
 ansible-lint
 ansible
 molecule
-molecule-plugins[docker]
+molecule-plugins[podman]
