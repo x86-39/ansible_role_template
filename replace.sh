@@ -20,7 +20,7 @@ else
     GITHUB_USER="$2"
 fi
 
-if [ "$ROLE_IN_COLLECTION" == "true" ]; then # So I can skip this when using the template for a role in a collection
+if [ "$ROLE_IN_COLLECTION" != "true" ]; then # So I can skip this when using the template for a role in a collection
     if [ -z "$GALAXY_API_KEY" ]; then
         echo "Enter galaxy api key: "
         read GALAXY_API_KEY
@@ -28,10 +28,10 @@ if [ "$ROLE_IN_COLLECTION" == "true" ]; then # So I can skip this when using the
 fi
 
 
-find . -type f -exec sed -i "s/diademiemi/${GITHUB_USER}/g" {} + # Do not run this more than once
-find . -type f -exec sed -i "s/template/${NEW_ROLE_NAME}/g" {} + # Do not run this more than once
+find defaults handlers meta molecule tasks tests vars LICENSE README.md \
+    -type f -exec sed -i -e "s/diademiemi/${GITHUB_USER}/g" -e "s/template/${NEW_ROLE_NAME}/g" {} + # Do not run this more than once
 
-if [ "$ROLE_IN_COLLECTION" == "true" ]; then
+if [ "$ROLE_IN_COLLECTION" != "true" ]; then
     # Assumes repo is named ansible_role_${NEW_ROLE_NAME}
     gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
 fi
