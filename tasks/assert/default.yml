@@ -7,5 +7,5 @@
       - __role_name | length > 0
       # Make sure I don't forget to replace the role name
       # This assert failing also ensures this role is not uploaded to Ansible Galaxy
-      - "__role_name != ['temp', 'late'] | join('')" 
+      - "__role_name != ['temp', 'late'] | join('')"
 ...
