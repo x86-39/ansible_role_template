@@ -34,6 +34,10 @@ find defaults handlers meta molecule tasks tests vars LICENSE README.md \
 if [ "$ROLE_IN_COLLECTION" != "true" ]; then
     # Assumes repo is named ansible_role_${NEW_ROLE_NAME}
     gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
+else
+    if [ "$ROLE_IN_COLLECTION" == "true" ]; then
+        rm -r ./.github
+    fi
 fi
 # Remove this section from README.md
 sed -i "/Role Structure/Q" README.md
