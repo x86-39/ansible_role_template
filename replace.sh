@@ -1,0 +1,41 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Enter role name: "
+    read NEW_ROLE_NAME
+else
+    NEW_ROLE_NAME=$1
+fi
+
+if [ -z "$2" ]; then
+    if [ -z "$GITHUB_USER" ]; then
+        if [ "$USERNAME" == "diademiemi" ]; then
+            GITHUB_USER="diademiemi" # For my own convenience
+        else
+            echo "Enter github user: "
+            read GITHUB_USER
+        fi
+    fi
+else
+    GITHUB_USER="$2"
+fi
+
+if [ "$ROLE_IN_COLLECTION" == "true" ]; then # So I can skip this when using the template for a role in a collection
+    if [ -z "$GALAXY_API_KEY" ]; then
+        echo "Enter galaxy api key: "
+        read GALAXY_API_KEY
+    fi
+fi
+
+
+find . -type f -exec sed -i "s/diademiemi/${GITHUB_USER}/g" {} + # Do not run this more than once
+find . -type f -exec sed -i "s/template/${NEW_ROLE_NAME}/g" {} + # Do not run this more than once
+
+if [ "$ROLE_IN_COLLECTION" == "true" ]; then
+    # Assumes repo is named ansible_role_${NEW_ROLE_NAME}
+    gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
+fi
+# Remove this section from README.md
+sed -i "/Role Structure/Q" README.md
+
+rm ./replace.sh

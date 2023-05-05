@@ -99,3 +99,5 @@ gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a 
 # Remove this section from README.md
 sed -i "/Role Structure/Q" README.md
 ```
+
+This is also provided as a script as `replace.sh`.  
