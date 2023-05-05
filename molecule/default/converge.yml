@@ -1,7 +1,12 @@
 ---
 - name: Converge
   hosts: all
-  gather_facts: false
+  gather_facts: true
+  pre_tasks:
+    - name: "Refresh Apt cache"
+      ansible.builtin.apt:
+        update_cache: true
+      when: ansible_os_family == 'Debian'
   tasks:
     - name: "Include diademiemi.template"
       ansible.builtin.include_role:

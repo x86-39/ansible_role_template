@@ -2,7 +2,7 @@
 dependency:
   name: galaxy
 driver:
-  name: podman
+  name: docker
 platforms:
   - name: ubuntu2004
     image: docker.io/geerlingguy/docker-ubuntu2004-ansible
@@ -49,7 +49,7 @@ platforms:
     privileged: true
     command: "/sbin/init"
   - name: el8
-    image: registry.access.redhat.com/ubi8/ubi-init
+    image: docker.io/geerlingguy/docker-rockylinux8-ansible
     pre_build_image: true
     systemd: true
     tmpfs:
@@ -60,7 +60,18 @@ platforms:
     privileged: true
     command: "/usr/sbin/init"
   - name: el9
-    image: registry.access.redhat.com/ubi9/ubi-init
+    image: docker.io/geerlingguy/docker-rockylinux9-ansible
+    pre_build_image: true
+    systemd: true
+    tmpfs:
+    - /run
+    - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    command: "/usr/sbin/init"
+  - name: fedora38
+    image: docker.io/geerlingguy/docker-fedora38-ansible
     pre_build_image: true
     systemd: true
     tmpfs:
