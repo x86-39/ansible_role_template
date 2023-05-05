@@ -1,6 +1,8 @@
 Ansible Role Template
 =========
 
+[![Molecule Test](https://github.com/diademiemi/ansible_role_template/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_role_template/actions/workflows/molecule.yml)
+
 This is an Ansible role to install and configure template.
 
 Include more information about template in this section.
