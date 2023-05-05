@@ -46,14 +46,15 @@ Example Playbook
     - diademiemi.template
 ```
 
-Role Structure
---------------
+License
+-------
 
-Roles have an entrypoint `main.yml` which includes other files.  
-It searches for files in `vars/`, `tasks/assert/` and `tasks/setup` for files named like the host platform. If no file is found, it falls back to `default.yml`.  
+MIT
 
-This is an easy way to provide distro-specific variables, assertions and tasks and allows me to keep the role structure clean.  
+Author Information
+------------------
 
+- diademiemi (@diademiemi)
 
 Role Testing
 ------------
@@ -68,13 +69,25 @@ Run the tests with
 ```bash
 molecule test
 ```
+Role Structure
+--------------
 
-License
--------
+Roles have an entrypoint `main.yml` which includes other files.  
+It searches for files in `vars/`, `tasks/assert/` and `tasks/setup` for files named like the host platform. If no file is found, it falls back to `default.yml`.  
 
-MIT
+This is an easy way to provide distro-specific variables, assertions and tasks and allows me to keep the role structure clean.  
 
-Author Information
-------------------
+Using Template
+--------------
+To use this template for a new role, run
+```bash
+export NEW_ROLE_NAME="NEW_NAME"
+export GITHUB_USER="diademiemi"
+export GALAXY_API_KEY="YOUR_API_KEY"
 
-- diademiemi (@diademiemi)
+find . -type f -exec sed -i "s/template/${NEW_ROLE_NAME}/g" {} +
+
+gh secret set GALAXY_API_KEY -u ${GITHUB_USER} -r ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
+
+sed -i "/Role Structure/Q" README.md
+```
