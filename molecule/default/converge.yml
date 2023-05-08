@@ -12,3 +12,5 @@
     - name: "Include diademiemi.template"
       ansible.builtin.include_role:
         name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+
+...
