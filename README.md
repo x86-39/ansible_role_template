@@ -45,7 +45,13 @@ Example Playbook
 - name: Use template role
   hosts: "{{ target | default('template') }}"
   roles:
-    - diademiemi.template
+    - role: "diademiemi.template"
+      vars:
+        __role_action:
+          - "setup"
+          #- "vendor" # Uncomment to run vendor-specific tasks
+      tags: ['diademiemi', 'template', 'setup']    
+    
 ```
 
 License

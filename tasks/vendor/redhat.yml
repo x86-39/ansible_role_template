@@ -1,0 +1,16 @@
+---
+# Example: vendor role should be included in a try/catch block
+#- name: "Vendor | Execute the vendor role and catch errors"
+#  block:
+#    - name: "Vendor | Include vendor role"
+#      ansible.builtin.include_role:
+#        name: vendor.collection.role
+#      vars:
+#        vendor_role_var1: "{{ custom_vendor_role_var | default('default') }}"
+
+#  rescue:
+#    - name: "Vendor | Handle errors"
+#      ansible.builtin.fail:
+#        msg: "Include vendor.collection.role role failed"
+
+...
