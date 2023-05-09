@@ -77,19 +77,19 @@ molecule test
 
 These tests are automatically ran by GitHub Actions on push. If the tests are successful, the role is automatically published to Ansible Galaxy.
 
-GitHub Actions is supposed to fail for this template repository, as it does not contain any meaningful role. There is an explicit assertion to check if the role name has been changed from `template` which causes the test to fail.    
-
 Role Structure
 --------------
 
 Roles have an entrypoint `main.yml` which includes other files.  
-It searches for files in `vars/`, `tasks/assert/` and `tasks/setup` for files named like the host platform. If no file is found, it falls back to `default.yml`.  
+For every file in `vars/`, `tasks/assert/` that matches the host these vars will be imported and assertions will be ran. For `tasks/setup` only the file most closely resembling the host will ran. If other tasks are necessary they can be included. If no file is found, it falls back to `default.yml`.  
 
 A variable `__role_action` can be used to change the path from `tasks/setup`. This can be useful when tasks should be run to revert the steps from the role or include a role from an upstream collection (E.g. including the Checkmk collection `tribe29.checkmk.agent` role instead of one's own). This can also be a list to chain these together (E.g. include preparation/post-setup tasks around the upstream role).  
 
 Please see [tasks/upstream/default.yml](./tasks/upstream/default.yml) for an example on how to include an upstream role.  
 
 This is an easy way to provide distro-specific variables, assertions and tasks and allows me to keep the role structure clean.  
+
+GitHub Actions is supposed to fail for this template repository, as it does not contain any meaningful role. There is an explicit assertion to check if the role name has been changed from `template` which causes the test to fail.    
 
 Using Template
 --------------
