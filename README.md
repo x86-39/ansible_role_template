@@ -85,6 +85,10 @@ Role Structure
 Roles have an entrypoint `main.yml` which includes other files.  
 It searches for files in `vars/`, `tasks/assert/` and `tasks/setup` for files named like the host platform. If no file is found, it falls back to `default.yml`.  
 
+A variable `__role_action` can be used to change the path from `tasks/setup`. This can be useful when tasks should be run to revert the steps from the role or include a role from an upstream collection (E.g. including the Checkmk collection `tribe29.checkmk.agent` role instead of one's own). This can also be a list to chain these together (E.g. include preparation/post-setup tasks around the upstream role).  
+
+Please see [tasks/upstream/default.yml](./tasks/upstream/default.yml) for an example on how to include an upstream role.  
+
 This is an easy way to provide distro-specific variables, assertions and tasks and allows me to keep the role structure clean.  
 
 Using Template
