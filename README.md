@@ -42,10 +42,13 @@ Example Playbook
 ----------------
 
 ```yaml
-- name: Use template role
-  hosts: "{{ target | default('template') }}"
-  roles:
-    - diademiemi.template
+    - role: "diademiemi.template"
+      vars:
+        __role_action: # Variable to control which tasks are ran
+          - "setup" # Default if none is given
+          # - "upstream" # Uncomment to delegate to role from upstream provider
+      tags: ['diademiemi', 'template', 'setup']    ```
+
 ```
 
 License
