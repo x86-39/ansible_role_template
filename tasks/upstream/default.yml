@@ -4,18 +4,18 @@
     msg: "Your platform is not supported"
   when: true
 
-#- name: "Upstream | Execute the upstream role"
-#  block:
-#    - name: "Upstream | Include upstream role"
-#      ansible.builtin.include_role:
-#        name: upstream.collection.role
-#      vars:
-#        upstream_role_var: "{{ upstream_role_var | default(template_role_var) }}"
+# - name: "Upstream | Execute the upstream role"
+#   block:
+#     - name: "Upstream | Include upstream role"
+#       ansible.builtin.include_role:
+#         name: upstream.collection.role
+#       vars:
+#         upstream_role_var: "{{ upstream_role_var | default(template_role_var) }}"
 #                                                   ^ Pass our vars to upstream
 #
 #  rescue:
-#    - name: "Upstream | Handle errors"
-#      ansible.builtin.fail:
-#        msg: "Include upstream.collection.role role failed"
+#     - name: "Upstream | Handle errors"
+#       ansible.builtin.fail:
+#         msg: "Include upstream.collection.role role failed"
 
 ...
