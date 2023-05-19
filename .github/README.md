@@ -42,12 +42,13 @@ Example Playbook
 ----------------
 
 ```yaml
-- role: "diademiemi.template"
-  vars:
-    __role_action: # Variable to control which tasks are ran
-      - "setup" # Default if none is given
-        # - "upstream" # Uncomment to delegate to role from upstream provider
-  tags: ['diademiemi', 'template']    
+    - role: "diademiemi.template"
+      vars:
+        __role_action: # Variable to control which tasks are ran
+          - "setup" # Default if none is given
+          # - "upstream" # Uncomment to delegate to role from upstream provider
+      tags: ['diademiemi', 'template', 'setup']    ```
+
 ```
 
 License
@@ -65,13 +66,11 @@ Role Testing
 
 This repository comes with Molecule tests for Docker on the supported platforms.
 Install Molecule by running
-
 ```bash
 pip3 install -r requirements.txt
 ```
 
 Run the tests with
-
 ```bash
 molecule test
 ```
@@ -95,7 +94,6 @@ GitHub Actions is supposed to fail for this template repository, as it does not 
 Using Template
 --------------
 To use this template for a new role, run
-
 ```bash
 export NEW_ROLE_NAME="NEW_NAME"
 export GITHUB_USER="diademiemi"
