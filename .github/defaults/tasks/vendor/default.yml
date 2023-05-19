@@ -1,7 +1,0 @@
----
-- name: "Vendor | Failover if no platform/version specific tasks are found"
-  ansible.builtin.fail:
-    msg: "Your platform is not supported"
-  when: true
-
-...
