@@ -28,7 +28,7 @@ if [ "$ROLE_IN_COLLECTION" != "true" ]; then
     gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
 else
     if [ "$ROLE_IN_COLLECTION" == "true" ]; then
-        rm -r ./.github
+        rm -r ./.github ./.gitlab-ci.yml
     fi
 fi
 
