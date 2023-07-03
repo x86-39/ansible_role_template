@@ -38,4 +38,6 @@ find defaults handlers meta molecule tasks tests vars LICENSE README.md \
 # Remove this section from README.md
 sed -i "/Role Structure/Q" README.md
 
+mv ansible_role_template.code-workspace ansible_role_${NEW_PROJECT_NAME}.code-workspace
+
 rm ./replace.sh
