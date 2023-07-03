@@ -18,7 +18,7 @@ These platforms are supported:
 - EL 9 (Tested on Rocky Linux 9)  
 - Fedora 38  
 
-<!-- 
+<!--
 - List hardware requirements here  
 -->
 
@@ -44,9 +44,9 @@ Example Playbook
 ```yaml
     - role: "diademiemi.template"
       vars:
-        __role_action: # Variable to control which tasks are ran
-          - "setup" # Default if none is given
-          # - "upstream" # Uncomment to delegate to role from upstream provider
+        __role_action:  # Variable to control which tasks are ran
+          - "setup"  # Default if none is given
+          # - "upstream"  # Uncomment to delegate to role from upstream provider
       tags: ['diademiemi', 'template', 'setup']    ```
 
 ```
@@ -91,7 +91,7 @@ Please see [tasks/upstream/default.yml](./tasks/upstream/default.yml) for an exa
 
 This is an easy way to provide distro-specific variables, assertions and tasks and allows me to keep the role structure clean.  
 
-GitHub Actions is supposed to fail for this template repository, as it does not contain any meaningful role. There is an explicit assertion to check if the role name has been changed from `template` which causes the test to fail.    
+GitHub Actions is supposed to fail for this template repository, as it does not contain any meaningful role. There is an explicit assertion to check if the role name has been changed from `template` which causes the test to fail.  
 
 Using Template
 --------------
