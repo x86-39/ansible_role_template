@@ -26,9 +26,10 @@ fi
 if [ "$ROLE_IN_COLLECTION" != "true" ]; then
     # Assumes repo is named ansible_role_${NEW_ROLE_NAME}
     gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
+    mv ansible_role_template.code-workspace ansible_role_${NEW_ROLE_NAME}.code-workspace
 else
     if [ "$ROLE_IN_COLLECTION" == "true" ]; then
-        rm -r ./.github ./.gitlab-ci.yml
+        rm -r ./.github ./.gitlab-ci.yml ansible_role_template.code-workspace .gitignore LICENSE
     fi
 fi
 
@@ -38,6 +39,5 @@ find defaults handlers meta molecule tasks tests vars LICENSE README.md \
 # Remove this section from README.md
 sed -i "/Role Structure/Q" README.md
 
-mv ansible_role_template.code-workspace ansible_role_${NEW_PROJECT_NAME}.code-workspace
 
 rm ./replace.sh
