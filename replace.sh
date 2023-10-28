@@ -30,6 +30,7 @@ if [ "$ROLE_IN_COLLECTION" != "true" ]; then
 else
     if [ "$ROLE_IN_COLLECTION" == "true" ]; then
         rm -r ./.github ./.gitlab-ci.yml ansible_role_template.code-workspace .gitignore LICENSE
+        sed -i "s/\[\!\[Molecule Test\].*//g" README.md
     fi
 fi
 
