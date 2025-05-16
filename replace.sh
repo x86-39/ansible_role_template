@@ -16,6 +16,15 @@ else
     GITHUB_USER="$2"
 fi
 
+if [ -z "$3" ]; then
+    if [ -z "$GALAXY_NAMESPACE" ]; then
+        echo "Enter Ansble Galaxy namespace: "
+        read GALAXY_NAMESPACE
+    fi
+else
+    GALAXY_NAMESPACE="$3"
+fi
+
 if [ "$ROLE_IN_COLLECTION" != "true" ]; then # So I can skip this when using the template for a role in a collection
     if [ -z "$GALAXY_API_KEY" ]; then
         echo "Enter galaxy api key: "
@@ -24,7 +33,10 @@ if [ "$ROLE_IN_COLLECTION" != "true" ]; then # So I can skip this when using the
 fi
 
 find defaults handlers meta molecule tasks tests vars LICENSE README.md \
-    -type f -exec sed -i -e "s/diademiemi/${GITHUB_USER}/g" -e "s/template/${NEW_ROLE_NAME}/g" {} + # Do not run this more than once
+    -type f -exec \
+    sed -i -e "s/x86_39/${GALAXY_NAMESPACE}/g" \
+    -e "s/x86-39/${GITHUB_USER}/g" \
+    -e "s/template/${NEW_ROLE_NAME}/g" {} + # Do not run this more than once
 
 if [ "$ROLE_IN_COLLECTION" != "true" ]; then
     # Assumes repo is named ansible_role_${NEW_ROLE_NAME}

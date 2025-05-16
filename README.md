@@ -1,7 +1,7 @@
 Ansible Role Template
 =========
 
-[![Molecule Test](https://github.com/diademiemi/ansible_role_template/actions/workflows/molecule.yml/badge.svg)](https://github.com/diademiemi/ansible_role_template/actions/workflows/molecule.yml)
+[![Molecule Test](https://github.com/x86-39/ansible_role_template/actions/workflows/molecule.yml/badge.svg)](https://github.com/x86-39/ansible_role_template/actions/workflows/molecule.yml)
 
 This is an Ansible role to install and configure template.
 
@@ -43,23 +43,13 @@ Example Playbook
 ----------------
 
 ```yaml
-- name: Use diademiemi.template role
+- name: Use x86_39.template role
   hosts: "{{ target | default('template') }}"
   roles:
-    - role: "diademiemi.template"
-      tags: ['diademiemi', 'template', 'setup']    ```
+    - role: "x86_39.template"
+      tags: ['x86_39', 'template', 'setup']    ```
 
 ```
-
-License
--------
-
-MIT
-
-Author Information
-------------------
-
-- diademiemi (@diademiemi)
 
 Role Testing
 ------------
@@ -95,22 +85,4 @@ GitHub Actions is supposed to fail for this template repository, as it does not 
 
 Using Template
 --------------
-To use this template for a new role, run
-
-
-```bash
-export NEW_ROLE_NAME="NEW_NAME"
-export GITHUB_USER="diademiemi"
-export GALAXY_API_KEY="YOUR_API_KEY"
-
-find . -type f -exec sed -i "s/diademiemi/${GITHUB_USER}/g" {} + # Do not run this more than once
-find . -type f -exec sed -i "s/template/${NEW_ROLE_NAME}/g" {} + # Do not run this more than once
-
-# Assumes repo is named ansible_role_${NEW_ROLE_NAME}
-gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
-
-# Remove this section from README.md
-sed -i "/Role Structure/Q" README.md
-```
-
-This is also provided as a script as `replace.sh`.  
+To use this template for a new role, run the script `replace.sh` to apply a new name, user, etc.

@@ -1,0 +1,32 @@
+---
+- name: Run x86_39.template on localhost
+  hosts: "{{ target | default('localhost') }}"
+  tasks:
+    - name: "Ensure temporary roles directory exists"
+      ansible.builtin.file:
+        path: "~/.ansible/roles"
+        state: directory
+        mode: '0755'
+      changed_when: false  # This is not relevant for the role, so we don't want to affect idempotency
+
+    - name: "Create temporary symlink in roles directory "
+      ansible.builtin.file:
+        src: "{{ lookup('env', 'PWD') }}"
+        dest: "~/.ansible/roles/{{ lookup('env', 'PWD') | basename }}"
+        state: link
+      changed_when: false  # This is not relevant for the role, so we don't want to affect idempotency
+
+    - name: Block to always remove temporary symlink
+      block:
+        - name: "Include x86_39.template"
+          ansible.builtin.include_role:
+            name: "{{ lookup('env', 'PWD') | basename }}"
+
+      always:
+        - name: "Remove temporary symlink in roles directory"
+          ansible.builtin.file:
+            path: "~/.ansible/roles/{{ lookup('env', 'PWD') | basename }}"
+            state: absent
+          changed_when: false  # This is not relevant for the role, so we don't want to affect idempotency
+
+...
