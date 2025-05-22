@@ -32,7 +32,7 @@ if [ "$ROLE_IN_COLLECTION" != "true" ]; then # So I can skip this when using the
     fi
 fi
 
-find defaults handlers meta molecule tasks tests vars LICENSE README.md \
+find defaults handlers meta molecule tasks vars LICENSE README.md run-localhost.yml\
     -type f -exec \
     sed -i -e "s/x86_39/${GALAXY_NAMESPACE}/g" \
     -e "s/x86-39/${GITHUB_USER}/g" \
@@ -44,8 +44,11 @@ if [ "$ROLE_IN_COLLECTION" != "true" ]; then
     mv ansible_role_template.code-workspace ansible_role_${NEW_ROLE_NAME}.code-workspace
 else
     if [ "$ROLE_IN_COLLECTION" == "true" ]; then
-        rm -r ./.github ./.gitlab-ci.yml ansible_role_template.code-workspace .gitignore LICENSE
+        rm -r ./.github ./.gitlab-ci.yml ansible_role_template.code-workspace .gitignore LICENSE .pre-commit-config.yaml .ansible-lint
         sed -i "s/\[\!\[Molecule Test\].*//g" README.md
+
+    elif [ "$ROLE_IN_PROJECT" == "true" ]; then
+        rm -r ./.github ./.gitlab-ci.yml ansible_role_template.code-workspace .gitignore LICENSE .pre-commit-config.yaml .ansible-lint
     fi
 fi
 

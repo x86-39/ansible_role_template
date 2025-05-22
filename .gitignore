@@ -13,6 +13,7 @@
 .terraform.lock.hcl
 
 # Ansible
+.ansible/
 /tests/output/
 /changelogs/.plugin-cache.yaml
 output/
