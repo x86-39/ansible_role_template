@@ -38,7 +38,7 @@ find defaults handlers meta molecule tasks vars LICENSE README.md run-localhost.
     -e "s/x86-39/${GITHUB_USER}/g" \
     -e "s/template/${NEW_ROLE_NAME}/g" {} + # Do not run this more than once
 
-if [ "$ROLE_IN_COLLECTION" != "true" ]; then
+if [ "$ROLE_IN_COLLECTION" != "true" && "$ROLE_IN_PROJECT" != "true" ]; then
     # Assumes repo is named ansible_role_${NEW_ROLE_NAME}
     gh secret set GALAXY_API_KEY -R ${GITHUB_USER}/ansible_role_${NEW_ROLE_NAME} -a actions -b ${GALAXY_API_KEY}
     mv ansible_role_template.code-workspace ansible_role_${NEW_ROLE_NAME}.code-workspace
